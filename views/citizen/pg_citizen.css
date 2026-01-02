@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  background-color: #f2f0f0;
+}
+
+p,
+h3 {
+  margin: 0;
+}
+
+/* Layout */
+.body {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  min-height: 100vh;
+}
+
+/* Appbar Styles */
+.appbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #7dc9e1;
+  white-space: nowrap;
+}
+
+.right-appbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.user-info p {
+  text-align: center;
+}
+
+.right-appbar button {
+  background-color: #ef4242;
+  color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 5px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background-color: #96afb8;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.sidebar h3 {
+  padding: 20px 5px;
+  align-self: center;
+}
+
+.sidebar div {
+  align-self: start;
+}
+
+.nav-item {
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: #839ba5;
+}
+
+.nav-item.active {
+  font-weight: bold;
+  border-left: 4px solid #7dc9e1;
+  padding-left: 10px;
+}
+
+/* Content Styles */
+.content {
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}

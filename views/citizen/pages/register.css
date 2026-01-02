@@ -1,0 +1,20 @@
+body {
+  background-color: gray;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* Puts label on top of input */
+  margin-bottom: 15px; /* Adds space between the pairs */
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px; /* Space between label and its own input */
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

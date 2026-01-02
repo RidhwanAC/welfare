@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Modernized font stack */
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Image side */
+.image-section {
+  width: 50%;
+  overflow: hidden; /* Ensures image doesn't bleed */
+}
+
+.image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Optional: adds a subtle zoom effect on load */
+  animation: slowZoom 20s infinite alternate;
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+/* Form side */
+.form-section {
+  width: 60%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.toggle-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  background: #f2f2f2;
+  padding: 5px;
+  border-radius: 30px;
+}
+
+.toggle-buttons button {
+  padding: 10px 30px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.toggle-buttons .active {
+  background: #66bfbf; /* Kept your color */
+  color: white;
+  box-shadow: 0 4px 10px rgba(102, 191, 191, 0.3);
+}
+
+.form {
+  display: none;
+  width: 100%;
+  max-width: 350px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form.active {
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1.5px solid #eee;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  border-color: #66bfbf; /* Kept your color */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #66bfbf; /* Kept your color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 15px;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #55a8a8;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(102, 191, 191, 0.4);
+}
+
+/* Simple spinner used in loading overlay */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 6px;
+  border: 4px solid #66bfbf;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #66bfbf transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
