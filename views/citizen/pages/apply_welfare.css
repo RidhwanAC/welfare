@@ -4,18 +4,17 @@
   }
 
   form {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 20px;
-    align-items: center;
   }
 
   .form-group {
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
   }
 
   .form-group label {
@@ -24,25 +23,29 @@
   }
 
   .form-group input,
-  .form-group select {
+  .form-group select,
+  .form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
     font-family: inherit;
+    box-sizing: border-box;
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    resize: none;
   }
 
   .form-group input:focus,
-  .form-group select:focus {
+  .form-group select:focus,
+  .form-group textarea:focus {
     outline: none;
     border-color: #7dc9e1;
     box-shadow: 0 0 0 3px rgba(125, 201, 225, 0.3);
   }
 
   button {
-    grid-column: 1 / -1;
-    justify-self: center;
+    align-self: center;
+    width: max-content;
     margin-top: 10px;
     padding: 10px 50px;
     background-color: #7dc9e1;

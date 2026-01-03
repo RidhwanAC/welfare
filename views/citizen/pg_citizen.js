@@ -2,30 +2,32 @@ const navItems = document.querySelectorAll(".nav-item");
 const contentArea = document.getElementById("main-content");
 
 const pages = {
-  Register: "./pages/register.html",
-  "Apply Welfare": "./pages/apply_welfare.html",
-  "Application Status": "./pages/application_status.html",
-  "Submit Complaint": "./pagest/submit_complaint.html",
-  "List Complaint": "./pages/list_complaint.html",
-  "My Aid History": "./pages/aid_history.html",
+  Register: "register",
+  "Apply Welfare": "apply_welfare",
+  "Application Status": "application_status",
+  "Submit Complaint": "submit_complaint",
+  "List Complaint": "list_complaint",
+  "My Aid History": "my_aid_history",
 };
 
 navItems.forEach((item) => {
   item.addEventListener("click", async function () {
     navItems.forEach((nav) => nav.classList.remove("active"));
-
     this.classList.add("active");
 
-    const selectedTitle = this.innerText;
-    const pageSource = pages[selectedTitle];
+    const pageKey = this.innerText;
+    const folder = pages[pageKey];
 
     try {
-      const response = await fetch(pageSource);
-      if (!response.ok)
-        throw new Error(`HTTP error! status: ${response.status}`);
+      const response = await fetch(`./pages/${folder}.html`);
+      const html = await response.text();
+      contentArea.innerHTML = html;
 
-      const htmlContent = await response.text();
-      contentArea.innerHTML = htmlContent;
+      const module = await import(`./pages/${folder}.js`);
+
+      if (module.init) {
+        module.init();
+      }
     } catch (error) {
       contentArea.innerHTML =
         "<h1>Error</h1><p>Could not load the requested page.</p>";

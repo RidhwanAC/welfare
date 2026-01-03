@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/apply_welfare.css" />
+  </head>
+  <body>
+    <h2>Welfare Application Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Type of Aid Needed</label>
+        <select id="district" required>
+          <!-- The disabled option acts like a placeholder -->
+          <option value="" disabled selected>-- Select district</option>
+          <option value="petaling">Petaling</option>
+          <option value="kinta">Kinta</option>
+          <option value="gombak">Gombak</option>
+          <option value="johor-bahru">Johor Bahru</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Welfare Category</label>
+        <select id="district" required>
+          <!-- The disabled option acts like a placeholder -->
+          <option value="" disabled selected>-- Select sub-district</option>
+          <option value="petaling">Petaling</option>
+          <option value="kinta">Kinta</option>
+          <option value="gombak">Gombak</option>
+          <option value="johor-bahru">Johor Bahru</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Remarks</label>
+        <textarea
+          id="remarks"
+          placeholder="-- Your Reply --"
+          rows="5"
+          required
+        ></textarea>
+      </div>
+      <button type="submit">Submit Application</button>
+    </form>
+  </body>
+</html>
