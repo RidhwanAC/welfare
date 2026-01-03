@@ -7,7 +7,7 @@ const pages = {
   "Application Status": "application_status",
   "Submit Complaint": "submit_complaint",
   "List Complaint": "list_complaint",
-  "My Aid History": "my_aid_history",
+  "My Aid History": "aid_history",
 };
 
 navItems.forEach((item) => {
@@ -19,11 +19,11 @@ navItems.forEach((item) => {
     const folder = pages[pageKey];
 
     try {
-      const response = await fetch(`./pages/${folder}.html`);
+      const response = await fetch(`./pages/${folder}/${folder}.html`);
       const html = await response.text();
       contentArea.innerHTML = html;
 
-      const module = await import(`./pages/${folder}.js`);
+      const module = await import(`./pages/${folder}/${folder}.js`);
 
       if (module.init) {
         module.init();

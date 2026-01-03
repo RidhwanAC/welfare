@@ -3,31 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/apply_welfare.css" />
+    <link rel="stylesheet" href="./pages/apply_welfare/apply_welfare.css" />
   </head>
   <body>
     <h2>Welfare Application Form</h2>
     <form>
       <div class="form-group">
         <label for="name">Type of Aid Needed</label>
-        <select id="district" required>
+        <select id="aid-type" required>
           <!-- The disabled option acts like a placeholder -->
-          <option value="" disabled selected>-- Select district</option>
-          <option value="petaling">Petaling</option>
-          <option value="kinta">Kinta</option>
-          <option value="gombak">Gombak</option>
-          <option value="johor-bahru">Johor Bahru</option>
+          <option value="" disabled selected>-- Select Aid Type</option>
+          <option value="food-assistance">Food Assistance</option>
+          <option value="cash-assistance">Cash Assistance</option>
+          <option value="medical-assistance">medical Assistance</option>
+          <option value="educational-support">Educational Support</option>
         </select>
       </div>
       <div class="form-group">
         <label for="name">Welfare Category</label>
-        <select id="district" required>
+        <select id="welfare-category" required>
           <!-- The disabled option acts like a placeholder -->
-          <option value="" disabled selected>-- Select sub-district</option>
-          <option value="petaling">Petaling</option>
-          <option value="kinta">Kinta</option>
-          <option value="gombak">Gombak</option>
-          <option value="johor-bahru">Johor Bahru</option>
+          <option value="" disabled selected>-- Select Category</option>
+          <option value="b40">B40</option>
+          <option value="single-mother">Single Mother</option>
+          <option value="elderly">Edlderly</option>
+          <option value="disabled">Disabled</option>
         </select>
       </div>
       <div class="form-group">

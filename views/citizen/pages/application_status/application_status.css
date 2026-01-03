@@ -1,0 +1,87 @@
+@scope (#main-content) {
+  :scope {
+    padding: 20px;
+  }
+
+  /* Container holds the list and defines the 5-column grid */
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: sans-serif;
+  }
+
+  /* Apply this to the spans or p tags inside your grid items */
+  .list-header span,
+  .list-item span,
+  .list-item p {
+    white-space: nowrap; /* Prevents text from jumping to the next line */
+    overflow: hidden; /* Hides the text that overflows the column */
+    text-overflow: ellipsis; /* Adds the "..." */
+    display: block; /* Ensures the element respects the width of the grid cell */
+  }
+
+  /* Define the grid for both headers and items */
+  .list-header,
+  .list-item {
+    display: grid;
+    /* Adjust '1fr' to change column widths (e.g., 1fr 2fr 1fr 1fr 1fr) */
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Styling the Header */
+  .list-header {
+    background-color: #f2f0f0;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Styling the Rows (ListView Items) */
+  .list-item:hover {
+    background-color: #f9f9f9;
+  }
+
+  .status.approved,
+  .status.pending,
+  .status.rejected {
+    /* Ensures the outline is visible even on thin fonts */
+    font-weight: 800;
+  }
+
+  .status.approved {
+    color: green;
+  }
+
+  .status.pending {
+    color: orange;
+  }
+
+  .status.rejected {
+    color: red;
+  }
+
+  /* Button styling */
+  .view-btn {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 5px 30px;
+    flex-shrink: 1;
+    background-color: #7dc9e1;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .view-btn:hover {
+    background-color: #66bfbf;
+    filter: brightness(1.1);
+    transform: scale(1.1);
+  }
+}

@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/register.css" />
+    <link rel="stylesheet" href="./pages/register/register.css" />
   </head>
   <body>
     <h2>Registration Form</h2>
-    <form>
+    <form id="register-form">
       <div class="form-group">
         <label for="name">Full Name</label>
         <input
@@ -79,7 +79,15 @@
           <option value="johor-bahru">Johor Bahru</option>
         </select>
       </div>
-      <button type="submit">Register</button>
+      <button type="button" class="submit" id="openModal">Register</button>
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+          <span class="close-btn" id="closeModal">&times;</span>
+          <h2>Hello!</h2>
+          <p>This is a custom popup window built with HTML, CSS, and JS.</p>
+          <button id="actionBtn">Got it!</button>
+        </div>
+      </div>
     </form>
   </body>
 </html>

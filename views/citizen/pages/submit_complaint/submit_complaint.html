@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="./pages/submit_complaint/submit_complaint.css"
+    />
+  </head>
+  <body>
+    <h2>Submit a Complaint</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Complaint Type</label>
+        <select id="complaint-type" required>
+          <!-- The disabled option acts like a placeholder -->
+          <option value="" disabled selected>-- Select Type</option>
+          <option value="poor-services">Poor Services</option>
+          <option value="delay-processing">Delay Processing</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Complaint Details</label>
+        <textarea
+          id="complaint-details"
+          placeholder="Please describe your complaint in detail..."
+          rows="5"
+          required
+        ></textarea>
+      </div>
+      <button type="submit">Submit Application</button>
+    </form>
+  </body>
+</html>
