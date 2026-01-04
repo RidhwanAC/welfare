@@ -2,7 +2,7 @@ const navItems = document.querySelectorAll(".nav-item");
 const contentArea = document.getElementById("main-content");
 
 const pages = {
-  Register: "register",
+  "My Info": "my_info",
   "Apply Welfare": "apply_welfare",
   "Application Status": "application_status",
   "Submit Complaint": "submit_complaint",

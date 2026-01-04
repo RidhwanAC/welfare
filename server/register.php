@@ -1,58 +1,70 @@
 <?php
-header('Content-Type: application/json; charset=utf-8');
-// Allow CORS during development (adjust in production)
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+// Set headers to return JSON response
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
+// Include the database connection
+include_once 'dbconnect.php';
 
-require_once __DIR__ . '/dbconnect.php';
+// Check if the request is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    // 1. Get input data (works for both standard form-data and JSON)
+    $username = $_POST['username'] ?? null;
+    $email    = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? null;
 
-$input = json_decode(file_get_contents('php://input'), true);
-if (!is_array($input)) {
-    // fall back to form-encoded
-    $input = $_POST;
-}
-
-$username = trim($input['username'] ?? '');
-$email = trim($input['email'] ?? '');
-$password = $input['password'] ?? '';
-$privilege = isset($input['privilege']) ? (int)$input['privilege'] : 0;
-
-if (!$username || !$email || !$password) {
-    echo json_encode(['status' => 'fail', 'message' => 'Missing required fields', 'data' => null]);
-    exit;
-}
-
-try {
-    $pdo = get_db();
-
-    // Check uniqueness
-    $stmt = $pdo->prepare('SELECT id FROM users WHERE username = :u OR email = :e LIMIT 1');
-    $stmt->execute([':u' => $username, ':e' => $email]);
-    if ($stmt->fetch()) {
-        echo json_encode(['status' => 'fail', 'message' => 'Username or email already exists', 'data' => null]);
+    // 2. Basic Validation
+    if (!$username || !$email || !$password) {
+        echo json_encode(["status" => "error", "message" => "Required fields are missing."]);
         exit;
     }
 
-    $hash = password_hash($password, PASSWORD_DEFAULT);
+    try {
+        // 3. Hash the password
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $pdo->prepare('INSERT INTO users (username, email, password, privilege) VALUES (:u, :e, :p, :pr)');
-    $stmt->execute([':u' => $username, ':e' => $email, ':p' => $hash, ':pr' => $privilege]);
+        // 4. Prepare SQL to insert user
+        // Note: full_name is handled by the SQL Trigger we created earlier
+        $sql = "INSERT INTO tbl_user (username, email, password) VALUES (:username, :email, :password)";
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
 
-    $id = $pdo->lastInsertId();
-    $stmt = $pdo->prepare('SELECT id, username, email, privilege, created_at FROM users WHERE id = :id');
-    $stmt->execute([':id' => $id]);
-    $user = $stmt->fetch();
+        if ($stmt->execute()) {
+            // 5. Get the ID of the newly created user
+            $userId = $conn->lastInsertId();
 
-    echo json_encode(['status' => 'success', 'message' => 'Registered', 'data' => $user]);
-    exit;
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(['status' => 'fail', 'message' => 'Server error', 'data' => null]);
-    exit;
+            // 6. Fetch user data (excluding password) to return in response
+            $query = "SELECT id, username, email, full_name, ic_number, phone, 
+                             household_size, household_income, district, 
+                             sub_district, privilege, created_at 
+                      FROM tbl_user WHERE id = :id";
+            
+            $getUser = $conn->prepare($query);
+            $getUser->bindParam(':id', $userId);
+            $getUser->execute();
+            $userData = $getUser->fetch();
+
+            // 7. Send Success Response
+            echo json_encode([
+                "status" => "success",
+                "message" => "Registration successful",
+                "data" => $userData
+            ]);
+        }
+    } catch (PDOException $e) {
+        // Handle Duplicate Entry errors (Username or Email)
+        if ($e->getCode() == 23000) {
+            echo json_encode(["status" => "error", "message" => "Username or Email already exists."]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Database error: " . $e->getMessage()]);
+        }
+    }
+} else {
+    echo json_encode(["status" => "error", "message" => "Invalid request method."]);
 }
+?>

@@ -1,33 +1,25 @@
 <?php
-// Simple PDO connection helper. Update credentials as needed.
-function get_db()
-{
-    static $pdo = null;
-    if ($pdo instanceof PDO) {
-        return $pdo;
-    }
+// Database Configuration
+$host     = "localhost";
+$db_name  = "mywelfare_db";
+$username = "root";
+$password = "";
 
-    $host = 'localhost';
-    $db   = 'mywelfare_db';
-    $user = 'root';
-    $pass = '';
-    $charset = 'utf8mb4';
+try {
+    // Create a new PDO instance
+    $conn = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password);
 
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $options = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ];
+    // Set error mode to Exception to catch connection issues
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    try {
-        $pdo = new PDO($dsn, $user, $pass, $options);
-        return $pdo;
-    } catch (PDOException $e) {
-        // For production, avoid exposing details
-        http_response_code(500);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['status' => 'fail', 'message' => 'Database connection error']);
-        exit;
-    }
+    // Optional: Set default fetch mode to associative array
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+    // If you need to test the connection, you can uncomment the line below:
+    // echo "Connected successfully"; 
+
+} catch (PDOException $e) {
+    // If connection fails, stop script and show error
+    die("Database Connection Failed: " . $e->getMessage());
 }
+?>
