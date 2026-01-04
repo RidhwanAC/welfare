@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // 2. Fetch all required fields + the password (for verification only)
-        $sql = "SELECT id, username, email, password, full_name, ic_number, phone, 
+        $sql = "SELECT user_id, username, email, password, full_name, ic_number, phone, 
                        household_size, household_income, district, 
                        sub_district, privilege, created_at 
                 FROM tbl_user 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['password'])) {
             
             // 4. Set Session Variables for the server-side
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
 
             // 5. Remove the password from the array before sending to auth.js

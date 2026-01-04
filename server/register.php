@@ -39,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = $conn->lastInsertId();
 
             // 6. Fetch user data (excluding password) to return in response
-            $query = "SELECT id, username, email, full_name, ic_number, phone, 
+            $query = "SELECT user_id, username, email, full_name, ic_number, phone, 
                              household_size, household_income, district, 
                              sub_district, privilege, created_at 
-                      FROM tbl_user WHERE id = :id";
+                      FROM tbl_user WHERE user_id = :user_id";
             
             $getUser = $conn->prepare($query);
-            $getUser->bindParam(':id', $userId);
+            $getUser->bindParam(':user_id', $userId);
             $getUser->execute();
             $userData = $getUser->fetch();
 

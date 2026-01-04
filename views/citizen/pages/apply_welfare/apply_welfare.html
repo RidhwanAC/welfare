@@ -7,7 +7,7 @@
   </head>
   <body>
     <h2>Welfare Application Form</h2>
-    <form>
+    <form id="welfare-form">
       <div class="form-group">
         <label for="name">Type of Aid Needed</label>
         <select id="aid-type" required>
@@ -39,7 +39,18 @@
           required
         ></textarea>
       </div>
-      <button type="submit">Submit Application</button>
+      <button type="submit" id="submitBtn">Submit Applicatin</button>
+
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+          <span class="close-btn" id="closeModal">&times;</span>
+          <h2 id="modalTitle">Success!</h2>
+          <p id="modalMessage">
+            Your application has been submitted successfully.
+          </p>
+          <button id="actionBtn">Got it!</button>
+        </div>
+      </div>
     </form>
   </body>
 </html>

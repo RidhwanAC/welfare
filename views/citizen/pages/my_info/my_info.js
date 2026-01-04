@@ -34,14 +34,51 @@ export function init(userData) {
     emailInput.readOnly = true;
   }
 
-  // 2. MODAL LOGIC
   if (openBtn) {
-    openBtn.addEventListener("click", (event) => {
+    openBtn.addEventListener("click", async (event) => {
       event.preventDefault();
-      if (form.checkValidity()) {
-        modal.classList.add("active");
-      } else {
+
+      if (!form.checkValidity()) {
         form.reportValidity();
+        return;
+      }
+
+      const payload = {
+        user_id: userData.user_id,
+        full_name: document.getElementById("full-name").value,
+        ic_number: document.getElementById("ic-number").value,
+        phone: document.getElementById("phone-number").value,
+        household_size: document.getElementById("household-size").value,
+        household_income: document.getElementById("monthly-income").value,
+        district: document.getElementById("district").value,
+        sub_district: document.getElementById("sub-district").value,
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost/welfare/welfare/server/update_my_info.php",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          }
+        );
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          // Sync localStorage
+          Object.assign(userData, payload);
+          localStorage.setItem("user_session", JSON.stringify(userData));
+
+          // ✅ OPEN MODAL ONLY ON SUCCESS
+          modal.classList.add("active");
+        } else {
+          alert("Error: " + result.message);
+        }
+      } catch (err) {
+        alert("Server error. Please try again.");
+        console.error(err);
       }
     });
   }
@@ -55,10 +92,7 @@ export function init(userData) {
   if (actionBtn) {
     actionBtn.addEventListener("click", (event) => {
       event.preventDefault();
-      // TODO: Add your save logic here
-
       closeModal();
-      // form.reset(); // Usually, you don't want to reset 'My Info' after saving
     });
   }
 }
