@@ -1,9 +1,16 @@
 @scope (#main-content) {
+  /* Page root padding */
   :scope {
     padding: 20px;
   }
 
-  /* Container holds the list and defines the 5-column grid */
+  /* =========================
+     LIST LAYOUT
+     ========================= */
+  .application-status-root {
+    width: 100%;
+  }
+
   .list-container {
     display: flex;
     flex-direction: column;
@@ -13,43 +20,40 @@
     font-family: sans-serif;
   }
 
-  /* Apply this to the spans or p tags inside your grid items */
   .list-header span,
   .list-item span,
   .list-item p {
-    white-space: nowrap; /* Prevents text from jumping to the next line */
-    overflow: hidden; /* Hides the text that overflows the column */
-    text-overflow: ellipsis; /* Adds the "..." */
-    display: block; /* Ensures the element respects the width of the grid cell */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
   }
 
-  /* Define the grid for both headers and items */
   .list-header,
   .list-item {
     display: grid;
-    /* Adjust '1fr' to change column widths (e.g., 1fr 2fr 1fr 1fr 1fr) */
     grid-template-columns: repeat(5, minmax(0, 1fr));
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #eee;
   }
 
-  /* Styling the Header */
   .list-header {
     background-color: #f2f0f0;
     font-weight: bold;
     border-radius: 8px 8px 0 0;
   }
 
-  /* Styling the Rows (ListView Items) */
   .list-item:hover {
     background-color: #f9f9f9;
   }
 
+  /* =========================
+     STATUS TEXT
+     ========================= */
   .status.approved,
   .status.pending,
   .status.rejected {
-    /* Ensures the outline is visible even on thin fonts */
     font-weight: 800;
   }
 
@@ -65,13 +69,14 @@
     color: red;
   }
 
-  /* Button styling */
+  /* =========================
+     VIEW BUTTON
+     ========================= */
   .view-btn {
     display: flex;
     grid-column: 1 / -1;
     justify-self: center;
-    padding: 5px 30px;
-    flex-shrink: 1;
+    padding: 6px 30px;
     background-color: #7dc9e1;
     border: 1px solid black;
     border-radius: 5px;
@@ -82,6 +87,118 @@
   .view-btn:hover {
     background-color: #66bfbf;
     filter: brightness(1.1);
-    transform: scale(1.1);
+    transform: scale(1.05);
+  }
+
+  /* =========================
+     MODAL OVERLAY
+     ========================= */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+  }
+
+  /* =========================
+     MODAL CARD
+     ========================= */
+  .modal-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    position: relative; /* REQUIRED for close button */
+  }
+
+  .modal-card h3 {
+    margin-bottom: 16px;
+  }
+
+  /* =========================
+     CLOSE BUTTON (FIXED)
+     ========================= */
+  .modal-card .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: bold;
+    user-select: none;
+  }
+
+  .modal-card .close-btn:hover {
+    color: #ff4d4d;
+  }
+
+  /* =========================
+     MODAL CONTENT
+     ========================= */
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 10px;
+  }
+
+  .detail-remarks {
+    margin-top: 16px;
+    max-height: calc(1.4em * 5); /* 5 lines */
+    line-height: 1.4;
+    overflow-y: auto;
+    padding-right: 6px; /* space for scrollbar */
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  .label {
+    font-weight: 600;
+  }
+
+  /* =========================
+     STATUS PILL
+     ========================= */
+  .status-pill {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  .status-pill.pending {
+    background: #fff3cd;
+    color: #856404;
+  }
+
+  .status-pill.approved {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  .status-pill.rejected {
+    background: #f8d7da;
+    color: #721c24;
+  }
+
+  /* =========================
+     CLOSE ACTION BUTTON
+     ========================= */
+  .close-action {
+    margin-top: 20px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
   }
 }

@@ -9,33 +9,54 @@
     />
   </head>
   <body>
-    <h2>Application Status</h2>
-    <div class="list-container">
-      <div class="list-header">
-        <span>ID</span>
-        <span>Type</span>
-        <span>Date</span>
-        <span>Status</span>
-        <span>Action</span>
-      </div>
+    <div class="application-status-root">
+      <h2>Application Status</h2>
 
-      <div class="list-item">
-        <span>APP-001</span>
-        <span>Food Assistance</span>
-        <span>01-06-2025</span>
-        <span class="status approved">Approved</span>
-        <div class="btn-container">
-          <button class="view-btn">View</button>
+      <div class="list-container">
+        <div class="list-header">
+          <span>ID</span>
+          <span>Type</span>
+          <span>Date</span>
+          <span>Status</span>
+          <span>Action</span>
         </div>
+
+        <div id="applicationList"></div>
       </div>
 
-      <div class="list-item">
-        <span>APP-002</span>
-        <span>Cash Assistance</span>
-        <span>02-06-2025</span>
-        <span class="status pending">Pending</span>
-        <div class="btn-container">
-          <button class="view-btn">View</button>
+      <!-- MODAL MUST BE INSIDE -->
+      <div class="modal-overlay" id="detailModal">
+        <div class="modal-card">
+          <span class="close-btn" id="closeDetailModal">&times;</span>
+
+          <h3>Application Details</h3>
+
+          <div class="detail-row">
+            <span class="label">Aid Type</span>
+            <span id="detailAidType"></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Welfare Category</span>
+            <span id="detailCategory"></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Applied On</span>
+            <span id="detailDate"></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Status</span>
+            <span id="detailStatus" class="status-pill"></span>
+          </div>
+
+          <div class="detail-remarks">
+            <span class="label">Remarks</span>
+            <p id="detailRemarks"></p>
+          </div>
+
+          <button class="close-action" id="closeDetailBtn">Close</button>
         </div>
       </div>
     </div>
