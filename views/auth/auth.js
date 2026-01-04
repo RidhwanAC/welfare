@@ -83,8 +83,9 @@ authForm.addEventListener("submit", async (e) => {
 
   try {
     const url =
-      currentMode === "register" ? "/server/register.php" : "/server/login.php";
-
+      currentMode === "register"
+        ? "http://localhost/welfare/welfare/server/register.php"
+        : "http://localhost/welfare/welfare/server/login.php";
     const response = await fetch(url, {
       method: "POST",
       body: formData,
@@ -103,15 +104,38 @@ authForm.addEventListener("submit", async (e) => {
       if (currentMode === "register") {
         showLogin();
       } else {
-        // Redirect to dashboard on login success
-        window.location.href = "dashboard.php";
+        // --- START OF NEW PRIVILEGE LOGIC ---
+        const user = result.data;
+        // Save the user object to localStorage
+        localStorage.setItem("user_session", JSON.stringify(result.data));
+        const privilege = parseInt(user.privilege);
+
+        switch (privilege) {
+          case 0:
+            window.location.href = "../citizen/pg_citizen.html";
+            break;
+          case 1:
+          case 2:
+          case 3:
+            window.location.href = "../admin/pg_admin.html";
+            break;
+          case 4:
+            window.location.href = "../hq/pg_hq.html";
+            break;
+          default:
+            alert(
+              "Login Error: Your account has an unrecognized privilege level (" +
+                privilege +
+                "). Please contact support."
+            );
+        }
+        // --- END OF NEW PRIVILEGE LOGIC ---
       }
     } else {
       alert("Error: " + result.message);
     }
   } catch (error) {
-    console.error("Submission Error:", error);
-    alert("Server error. Please try again later.");
+    alert("Server error. Please try again later.\n " + error.message);
   } finally {
     // 3. Re-enable button
     submitBtn.disabled = false;

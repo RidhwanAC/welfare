@@ -35,7 +35,8 @@
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   }
 
-  .form-group input:focus,
+  /* Prevent focus styles on readonly inputs */
+  .form-group input:not([readonly]):focus,
   .form-group select:focus {
     outline: none;
     border-color: #7dc9e1;
@@ -46,6 +47,19 @@
   select:invalid:focus {
     border: 2px solid #ff4d4d;
     outline: none;
+  }
+
+  /* Readonly inputs */
+  .form-group input[readonly] {
+    background-color: #f2f2f2;
+    color: #666;
+    border-color: #bbb;
+    cursor: not-allowed;
+  }
+
+  /* Optional: subtle lock cue */
+  .form-group input[readonly]::placeholder {
+    color: #999;
   }
 
   /* --- Buttons --- */

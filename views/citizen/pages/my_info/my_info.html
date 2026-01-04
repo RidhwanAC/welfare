@@ -33,6 +33,7 @@
           id="email-address"
           placeholder="Enter your email address"
           required
+          readonly
         />
       </div>
       <div class="form-group">
@@ -79,13 +80,13 @@
           <option value="johor-bahru">Johor Bahru</option>
         </select>
       </div>
-      <button type="button" class="submit" id="registerModal">Register</button>
+      <button type="button" class="submit" id="openModal">Save</button>
       <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
           <span class="close-btn" id="closeModal">&times;</span>
-          <h2>Hello!</h2>
-          <p>This is a custom popup window built with HTML, CSS, and JS.</p>
-          <button id="actionBtn">Got it!</button>
+          <h2>Success</h2>
+          <p>Your information has been saved.</p>
+          <button id="actionBtn">OK!</button>
         </div>
       </div>
     </form>
