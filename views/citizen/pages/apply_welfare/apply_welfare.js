@@ -21,7 +21,7 @@ export function init(userData) {
       aid_type: document.getElementById("aid-type").value,
       welfare_category: document.getElementById("welfare-category").value,
       remarks: document.getElementById("remarks").value,
-      status: "Pending", // Default status
+      status: "Pending",
     };
 
     // 3. HTTP POST
