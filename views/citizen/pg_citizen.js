@@ -32,7 +32,6 @@ const pages = {
   "Application Status": "application_status",
   "Submit Complaint": "submit_complaint",
   "List Complaint": "list_complaint",
-  "My Aid History": "aid_history",
 };
 
 navItems.forEach((item) => {

@@ -6,33 +6,48 @@
     <link rel="stylesheet" href="./pages/list_complaint/list_complaint.css" />
   </head>
   <body>
-    <h2>View Complaint</h2>
-    <div class="list-container">
-      <div class="list-header">
-        <span>ID</span>
-        <span>Type</span>
-        <span>Date</span>
-        <span>Status</span>
-        <span>Action</span>
-      </div>
+    <div class="complaint-list-root">
+      <h2>My Complaints</h2>
 
-      <div class="list-item">
-        <span>CMP-001</span>
-        <span>Poor Services</span>
-        <span>01-06-2025</span>
-        <span class="status resolved">Resolved</span>
-        <div class="btn-container">
-          <button class="view-btn">View</button>
+      <div class="list-container">
+        <div class="list-header">
+          <span>ID</span>
+          <span>Type</span>
+          <span>Date</span>
+          <span>Status</span>
+          <span>Action</span>
         </div>
+
+        <div id="complaintList"></div>
       </div>
 
-      <div class="list-item">
-        <span>CMP-002</span>
-        <span>Delay Processing</span>
-        <span>02-06-2025</span>
-        <span class="status pending">Pending</span>
-        <div class="btn-container">
-          <button class="view-btn">View</button>
+      <div class="modal-overlay" id="complaintDetailModal">
+        <div class="modal-card">
+          <span class="close-btn" id="closeComplaintModal">&times;</span>
+
+          <h3>Complaint Details</h3>
+
+          <div class="detail-row">
+            <span class="label">Complaint Type</span>
+            <span id="detailComplaintType"></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Date Submitted</span>
+            <span id="detailComplaintDate"></span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Status</span>
+            <span id="detailComplaintStatus" class="status-pill"></span>
+          </div>
+
+          <div class="detail-remarks">
+            <span class="label">Details</span>
+            <p id="detailComplaintDetails"></p>
+          </div>
+
+          <button class="close-action" id="closeComplaintBtn">Close</button>
         </div>
       </div>
     </div>

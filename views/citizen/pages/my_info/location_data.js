@@ -1,0 +1,41 @@
+// location_data.js
+export const kedahData = {
+  "kota-setar": [
+    "Alor Merah",
+    "Anak Bukit",
+    "Gunung",
+    "Kota Setar",
+    "Langgar",
+    "Pengkalan Kundor",
+  ],
+  "kubang-pasu": [
+    "Ah",
+    "Binjal",
+    "Changlun",
+    "Hosba",
+    "Jitra",
+    "Malau",
+    "Putat",
+    "Tunjang",
+  ],
+  "kuala-muda": [
+    "Bakai",
+    "Bedong",
+    "Gurun",
+    "Pekula",
+    "Pinang Tunggal",
+    "Sungai Petani",
+    "Tikam Batu",
+  ],
+  kulim: ["Junjong", "Karangan", "Kulim", "Lunas", "Mahang", "Padang Cina"],
+  langkawi: ["Ayer Hangat", "Kuah", "Padang Matsirat", "Ulu Melaka"],
+  pendang: [
+    "Air Puteh",
+    "Bukit Raya",
+    "Padang Kerbau",
+    "Pendang",
+    "Rambai",
+    "Tobiar",
+  ],
+  baling: ["Baling", "Bakai", "Kupang", "Pulai", "Siong", "Teloi Kanan"],
+};
