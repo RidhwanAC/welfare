@@ -1,101 +1,105 @@
 @scope (#main-content) {
-  /* Page root padding */
   :scope {
-    padding: 20px;
+    padding: 24px;
+    background-color: #f8f9fa;
+    min-height: 100%;
   }
 
-  /* =========================
-      LIST LAYOUT
-     ========================= */
-  .complaint-list-root {
-    width: 100%;
+  h2 {
+    margin-bottom: 24px;
+    color: #2d3436;
+    font-weight: 600;
   }
 
+  /* --- List Container Standard --- */
   .list-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
     max-width: 1000px;
     margin: 0 auto;
-    font-family: sans-serif;
-  }
-
-  .list-header span,
-  .list-item span,
-  .list-item p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
+    border: 1px solid #edf2f7;
   }
 
   .list-header,
   .list-item {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    /* Consistent 5-column grid proportions */
+    grid-template-columns: 80px 1.5fr 1fr 1fr 120px;
     align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid #eee;
+    padding: 16px 24px;
+    gap: 12px;
   }
 
   .list-header {
-    background-color: #f2f0f0;
-    font-weight: bold;
-    border-radius: 8px 8px 0 0;
+    background-color: #f1f3f5;
+    font-weight: 700;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  .list-item {
+    border-bottom: 1px solid #edf2f7;
+    transition: background 0.2s ease;
   }
 
   .list-item:hover {
-    background-color: #f9f9f9;
+    background-color: #fcfdfe;
   }
 
-  /* =========================
-      STATUS TEXT (LIST VIEW)
-     ========================= */
-  .status.resolved,
-  .status.viewed,
+  .list-item span {
+    font-size: 0.95rem;
+    color: #2d3436;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* --- Inline Status Colors (List View) --- */
+  .status {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
   .status.pending {
-    font-weight: 800;
-  }
-
-  .status.resolved {
-    color: green;
-  }
-
+    color: #fd7e14;
+  } /* Orange */
   .status.viewed {
-    color: #007bff; /* Professional Blue */
-  }
+    color: #007bff;
+  } /* Blue */
+  .status.resolved {
+    color: #2ecc71;
+  } /* Green */
 
-  .status.pending {
-    color: orange;
-  }
-
-  /* =========================
-      VIEW BUTTON
-     ========================= */
+  /* --- View Button --- */
   .view-btn {
-    display: flex;
-    justify-self: center;
-    padding: 6px 30px;
+    padding: 8px 16px;
     background-color: #7dc9e1;
-    border: 1px solid black;
-    border-radius: 5px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    justify-self: center;
   }
 
   .view-btn:hover {
     background-color: #66bfbf;
-    filter: brightness(1.1);
-    transform: scale(1.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(125, 201, 225, 0.3);
   }
 
-  /* =========================
-      MODAL OVERLAY
-     ========================= */
+  /* --- Modal Overlay --- */
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(45, 52, 54, 0.6);
+    backdrop-filter: blur(3px);
     display: none;
     align-items: center;
     justify-content: center;
@@ -106,100 +110,104 @@
     display: flex;
   }
 
+  /* --- Modal Card --- */
   .modal-card {
-    background: #ffffff;
-    width: 100%;
-    max-width: 420px;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    background: #fff;
+    width: 95%;
+    max-width: 450px;
+    padding: 32px;
+    border-radius: 20px;
     position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   }
 
   .modal-card h3 {
-    margin-bottom: 16px;
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: #1a202c;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 12px;
   }
 
-  .modal-card .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    cursor: pointer;
-    font-size: 22px;
-    line-height: 1;
-    font-weight: bold;
-    user-select: none;
-  }
-
-  .modal-card .close-btn:hover {
-    color: #ff4d4d;
-  }
-
-  /* =========================
-      MODAL CONTENT & ROWS
-     ========================= */
   .detail-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    gap: 10px;
-  }
-
-  .detail-remarks {
-    margin-top: 16px;
-    max-height: 150px;
-    line-height: 1.4;
-    overflow-y: auto;
-    padding-right: 6px;
-    word-wrap: break-word;
-    white-space: normal;
-    background: #fdfdfd;
-    border: 1px solid #f0f0f0;
-    padding: 8px;
-    border-radius: 4px;
+    align-items: center;
+    margin-bottom: 16px;
   }
 
   .label {
     font-weight: 600;
+    color: #718096;
+    font-size: 0.9rem;
   }
 
-  /* =========================
-      STATUS PILLS (MODAL)
-     ========================= */
+  /* --- Detail Remarks (The "Details" box) --- */
+  .detail-remarks {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
+    border-left: 4px solid #7dc9e1; /* The signature teal accent */
+    color: #4a5568;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-break: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  /* --- Status Pills in Modal --- */
   .status-pill {
-    padding: 4px 12px;
-    border-radius: 999px;
+    padding: 4px 14px;
+    border-radius: 20px;
     font-weight: 700;
-    text-transform: capitalize;
+    font-size: 0.8rem;
+    text-transform: uppercase;
   }
-
   .status-pill.pending {
     background: #fff3cd;
     color: #856404;
   }
-
   .status-pill.viewed {
     background: #cfe2ff;
     color: #084298;
   }
-
   .status-pill.resolved {
     background: #d4edda;
     color: #155724;
   }
 
-  .close-action {
-    margin-top: 20px;
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: #f8f9fa;
+  /* --- Modal Close Elements --- */
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 24px;
     cursor: pointer;
+    font-size: 28px;
+    color: #a0aec0;
+    transition: color 0.2s;
+  }
+
+  .close-btn:hover {
+    color: #e74c3c;
+  }
+
+  .close-action {
+    margin-top: 24px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #718096;
     font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
   }
 
   .close-action:hover {
-    background: #e2e6ea;
+    background: #f8fafc;
+    color: #2d3436;
   }
 }

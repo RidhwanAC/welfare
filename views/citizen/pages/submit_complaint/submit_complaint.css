@@ -1,115 +1,182 @@
 @scope (#main-content) {
   :scope {
-    padding: 20px;
-  }
-
-  /* =========================
-     FORM LAYOUT
-     ========================= */
-  form {
+    padding: 24px;
+    background-color: #f8f9fa;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    align-items: center;
+  }
+
+  h2 {
+    margin-bottom: 24px;
+    color: #2d3436;
+    font-weight: 600;
+    align-self: flex-start;
+    max-width: 600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* --- Form Card Layout --- */
+  form {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid #edf2f7;
+    box-sizing: border-box;
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    align-items: flex-start;
   }
 
   .form-group label {
-    white-space: nowrap;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
-  .form-group input,
+  /* --- Inputs, Selects & Textarea --- */
   .form-group select,
   .form-group textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
+    padding: 12px;
     font-family: inherit;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    resize: none;
+    border: 2px solid #edf2f7;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #2d3436;
+    transition: all 0.2s ease;
+    background-color: #fff;
   }
 
-  .form-group input:focus,
+  .form-group textarea {
+    resize: none;
+    line-height: 1.6;
+    min-height: 150px;
+  }
+
+  /* Focus States */
   .form-group select:focus,
   .form-group textarea:focus {
     outline: none;
     border-color: #7dc9e1;
-    box-shadow: 0 0 0 3px rgba(125, 201, 225, 0.3);
+    box-shadow: 0 0 0 4px rgba(125, 201, 225, 0.15);
+    background-color: #fff;
   }
 
-  /* =========================
-     SUBMIT BUTTON
-     ========================= */
-  button {
-    align-self: center;
-    width: max-content;
-    margin-top: 10px;
-    padding: 10px 50px;
+  /* --- Submit Button --- */
+  button[type="submit"] {
+    align-self: stretch; /* Full width button for better mobile UX */
+    margin-top: 8px;
+    padding: 14px;
     background-color: #7dc9e1;
-    border: 1px solid black;
-    border-radius: 5px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(125, 201, 225, 0.2);
   }
 
-  button:hover {
+  button[type="submit"]:hover {
     background-color: #66bfbf;
-    filter: brightness(1.1);
-    transform: scale(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(125, 201, 225, 0.3);
   }
 
-  /* =========================
-     MODAL STYLES
-     ========================= */
+  /* --- Success Modal Styles --- */
   .modal-overlay {
     position: fixed;
     inset: 0;
-    z-index: 1000;
-
-    display: flex;
-    justify-content: center;
+    background: rgba(45, 52, 54, 0.6);
+    backdrop-filter: blur(3px);
+    display: none;
     align-items: center;
-
-    background-color: rgba(0, 0, 0, 0.5);
-
+    justify-content: center;
+    z-index: 9999;
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
-
-    transition: opacity 0.2s ease-in-out;
+    transition: all 0.3s ease;
   }
 
   .modal-overlay.active {
+    display: flex;
     opacity: 1;
     visibility: visible;
-    pointer-events: auto;
   }
 
   .modal-content {
-    position: relative;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 90%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     text-align: center;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.active .modal-content {
+    transform: translateY(0);
+  }
+
+  #modalTitle {
+    color: #2ecc71; /* Green for Success */
+    margin-top: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  #modalMessage {
+    color: #4a5568;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  #actionBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  #actionBtn:hover {
+    background-color: #27ae60;
   }
 
   .close-btn {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 15px;
+    right: 20px;
     font-size: 24px;
+    color: #a0aec0;
     cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .close-btn:hover {
+    color: #e74c3c;
   }
 }
