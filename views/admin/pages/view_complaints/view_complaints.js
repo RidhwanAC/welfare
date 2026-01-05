@@ -1,105 +1,102 @@
 let complaints = [];
+let currentComplaintId = null;
 
 export async function init(userData) {
   const listContainer = document.getElementById("complaintList");
-  const modal = document.getElementById("complaintDetailModal");
-  const closeBtn = document.getElementById("closeComplaintModal");
-  const closeActionBtn = document.getElementById("closeComplaintBtn");
+  const modal = document.getElementById("detailModal");
+  const closeBtn = document.getElementById("closeDetailModal");
+  const closeActionBtn = document.getElementById("closeDetailBtn");
+  const saveBtn = document.getElementById("saveStatusBtn");
 
-  if (!userData || !listContainer || !modal) return;
+  if (!userData || !listContainer) return;
 
-  // Modal close logic
   const closeModal = () => modal.classList.remove("active");
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
-  if (closeActionBtn) closeActionBtn.addEventListener("click", closeModal);
-
-  modal.addEventListener("click", (e) => {
+  if (closeBtn) closeBtn.onclick = closeModal;
+  if (closeActionBtn) closeActionBtn.onclick = closeModal;
+  modal.onclick = (e) => {
     if (e.target === modal) closeModal();
-  });
+  };
 
-  try {
-    // Note: Ensure this PHP endpoint exists or update the path
-    const response = await fetch(
-      `http://localhost/welfare/welfare/server/fetch_complaint.php?user_id=${userData.user_id}`
-    );
-
-    const result = await response.json();
-
-    if (result.status !== "success") {
-      listContainer.innerHTML = "<p>Failed to load complaints.</p>";
-      return;
-    }
-
-    if (result.data.length === 0) {
-      listContainer.innerHTML = "<p>No complaints found.</p>";
-      return;
-    }
-
-    complaints = result.data;
-
-    listContainer.innerHTML = complaints
-      .map((comp) => {
-        const date = new Date(comp.created_at).toLocaleDateString();
-
-        return `
-          <div class="list-item">
-            <span>CMP-${comp.complaint_id}</span>
-            <span>${formatText(comp.complaint_type)}</span>
-            <span>${date}</span>
-            <span class="status ${comp.status.toLowerCase()}">
-              ${comp.status}
-            </span>
-            <div class="btn-container">
-              <button class="view-btn" data-id="${comp.complaint_id}">
-                View
-              </button>
-            </div>
-          </div>
-        `;
-      })
-      .join("");
-
-    // Event delegation
-    listContainer.addEventListener("click", (e) => {
-      const btn = e.target.closest(".view-btn");
-      if (!btn) return;
-
-      const id = btn.dataset.id;
-      const complaint = complaints.find(
-        (c) => c.complaint_id.toString() === id
-      );
-
-      if (complaint) {
-        openModal(complaint, modal);
+  const loadData = async () => {
+    try {
+      // Updated URL for complaints
+      const url = `/welfare/welfare/server/fetch_complaint.php?user_id=${userData.user_id}&privilege=${userData.privilege}&district=${userData.district}&sub_district=${userData.sub_district}`;
+      const response = await fetch(url);
+      const result = await response.json();
+      if (result.status === "success") {
+        complaints = result.data;
+        renderList(listContainer);
       }
-    });
-  } catch (err) {
-    console.error(err);
-    listContainer.innerHTML = "<p>Server error.</p>";
-  }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  saveBtn.onclick = async () => {
+    const newStatus = document.getElementById("updateStatusSelect").value;
+    try {
+      const res = await fetch("/welfare/welfare/server/update_complaint.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          complaint_id: currentComplaintId,
+          status: newStatus,
+        }),
+      });
+      const data = await res.json();
+      if (data.status === "success") {
+        alert("Complaint Status Updated!");
+        closeModal();
+        loadData();
+      }
+    } catch (e) {
+      alert("Update failed");
+    }
+  };
+
+  loadData();
+
+  listContainer.onclick = (e) => {
+    const btn = e.target.closest(".view-btn");
+    if (!btn) return;
+    const complaint = complaints.find((c) => c.complaint_id == btn.dataset.id);
+    if (complaint) openModal(complaint, modal);
+  };
 }
 
-function openModal(complaint, modal) {
-  modal.querySelector("#detailComplaintType").textContent = formatText(
-    complaint.complaint_type
-  );
+function renderList(container) {
+  container.innerHTML = complaints
+    .map(
+      (cmp) => `
+    <div class="list-item">
+        <span>CMP-${cmp.complaint_id}</span>
+        <span class="truncate"><b>${cmp.full_name}</b></span>
+        <span>${new Date(cmp.created_at).toLocaleDateString()}</span>
+        <span class="status ${cmp.status.toLowerCase()}">${cmp.status}</span>
+        <button class="view-btn" data-id="${cmp.complaint_id}">Manage</button>
+    </div>
+  `
+    )
+    .join("");
+}
 
-  modal.querySelector("#detailComplaintDate").textContent = new Date(
-    complaint.created_at
-  ).toLocaleString();
+function openModal(cmp, modal) {
+  currentComplaintId = cmp.complaint_id;
 
-  const statusEl = modal.querySelector("#detailComplaintStatus");
-  statusEl.textContent = complaint.status;
-  statusEl.className = `status-pill ${complaint.status.toLowerCase()}`;
+  modal.querySelector("#detailName").textContent = cmp.full_name;
+  modal.querySelector("#detailStatus").textContent = cmp.status;
 
-  modal.querySelector("#detailComplaintDetails").textContent =
-    complaint.complaint_details || "-";
+  const statusEl = modal.querySelector("#detailStatus");
+  statusEl.className = `status-pill ${cmp.status.toLowerCase()}`;
+
+  // Using complaint_details field
+  modal.querySelector("#detailRemarks").textContent =
+    cmp.complaint_details || "No details provided.";
+
+  const select = modal.querySelector("#updateStatusSelect");
+  if (select) {
+    select.value = cmp.status.toLowerCase();
+  }
 
   modal.classList.add("active");
-}
-
-function formatText(text) {
-  return (
-    text?.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) || "-"
-  );
 }

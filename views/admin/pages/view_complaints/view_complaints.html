@@ -6,48 +6,52 @@
     <link rel="stylesheet" href="./pages/view_complaints/view_complaints.css" />
   </head>
   <body>
-    <div class="complaint-list-root">
-      <h2>My Complaints</h2>
+    <div class="application-status-root">
+      <h2>Citizen Complaints</h2>
 
       <div class="list-container">
         <div class="list-header">
           <span>ID</span>
-          <span>Type</span>
+          <span>Complainant</span>
           <span>Date</span>
           <span>Status</span>
           <span>Action</span>
         </div>
-
         <div id="complaintList"></div>
       </div>
 
-      <div class="modal-overlay" id="complaintDetailModal">
+      <div class="modal-overlay" id="detailModal">
         <div class="modal-card">
-          <span class="close-btn" id="closeComplaintModal">&times;</span>
-
-          <h3>Complaint Details</h3>
-
-          <div class="detail-row">
-            <span class="label">Complaint Type</span>
-            <span id="detailComplaintType"></span>
-          </div>
+          <span class="close-btn" id="closeDetailModal">&times;</span>
+          <h3>Complaint Review</h3>
 
           <div class="detail-row">
-            <span class="label">Date Submitted</span>
-            <span id="detailComplaintDate"></span>
+            <span class="label">Complainant Name</span>
+            <span id="detailName" style="font-weight: bold"></span>
           </div>
-
           <div class="detail-row">
-            <span class="label">Status</span>
-            <span id="detailComplaintStatus" class="status-pill"></span>
+            <span class="label">Current Status</span>
+            <span id="detailStatus" class="status-pill"></span>
           </div>
-
           <div class="detail-remarks">
-            <span class="label">Details</span>
-            <p id="detailComplaintDetails"></p>
+            <span class="label">Complaint Details</span>
+            <p id="detailRemarks" class="remarks-box"></p>
           </div>
 
-          <button class="close-action" id="closeComplaintBtn">Close</button>
+          <div id="adminActionSection" class="admin-controls">
+            <hr />
+            <label class="label">Update Status</label>
+            <select id="updateStatusSelect">
+              <option value="pending">Pending</option>
+              <option value="viewed">Viewed</option>
+              <option value="resolved">Resolved</option>
+            </select>
+            <button class="save-btn" id="saveStatusBtn">
+              Update Complaint
+            </button>
+          </div>
+
+          <button class="close-action" id="closeDetailBtn">Close</button>
         </div>
       </div>
     </div>

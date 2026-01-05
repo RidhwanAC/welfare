@@ -1,14 +1,14 @@
 @scope (#main-content) {
-  /* Page root padding */
   :scope {
-    padding: 20px;
+    padding: 24px;
+    background-color: #f8f9fa;
+    min-height: 100%;
   }
 
-  /* =========================
-      LIST LAYOUT
-     ========================= */
-  .complaint-list-root {
-    width: 100%;
+  h2 {
+    margin-bottom: 24px;
+    color: #2d3436;
+    font-weight: 600;
   }
 
   .list-container {
@@ -17,189 +17,171 @@
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    font-family: sans-serif;
-  }
-
-  .list-header span,
-  .list-item span,
-  .list-item p {
-    white-space: nowrap;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
   }
 
   .list-header,
   .list-item {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    /* Updated to 5 columns: ID, Complainant, Date, Status, Action */
+    grid-template-columns: 100px 1.5fr 1fr 1fr 120px;
     align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid #eee;
+    padding: 16px;
+    gap: 12px;
   }
 
   .list-header {
-    background-color: #f2f0f0;
-    font-weight: bold;
-    border-radius: 8px 8px 0 0;
+    background-color: #f1f3f5;
+    font-weight: 700;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    border-bottom: 2px solid #dee2e6;
   }
 
+  .list-item {
+    border-bottom: 1px solid #edf2f7;
+  }
   .list-item:hover {
-    background-color: #f9f9f9;
+    background-color: #fdfdfd;
   }
 
-  /* =========================
-      STATUS TEXT (LIST VIEW)
-     ========================= */
-  .status.resolved,
-  .status.viewed,
+  /* COMPLAINT STATUS COLORS */
+  .status {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
   .status.pending {
-    font-weight: 800;
+    color: #fd7e14;
   }
-
-  .status.resolved {
-    color: green;
-  }
-
   .status.viewed {
-    color: #007bff; /* Professional Blue */
+    color: #0984e3;
+  }
+  .status.resolved {
+    color: #28a745;
   }
 
-  .status.pending {
-    color: orange;
-  }
-
-  /* =========================
-      VIEW BUTTON
-     ========================= */
-  .view-btn {
-    display: flex;
-    justify-self: center;
-    padding: 6px 30px;
-    background-color: #7dc9e1;
-    border: 1px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .view-btn:hover {
-    background-color: #66bfbf;
-    filter: brightness(1.1);
-    transform: scale(1.05);
-  }
-
-  /* =========================
-      MODAL OVERLAY
-     ========================= */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-
-  .modal-overlay.active {
-    display: flex;
-  }
-
-  .modal-card {
-    background: #ffffff;
-    width: 100%;
-    max-width: 420px;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    position: relative;
-  }
-
-  .modal-card h3 {
-    margin-bottom: 16px;
-  }
-
-  .modal-card .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    cursor: pointer;
-    font-size: 22px;
-    line-height: 1;
-    font-weight: bold;
-    user-select: none;
-  }
-
-  .modal-card .close-btn:hover {
-    color: #ff4d4d;
-  }
-
-  /* =========================
-      MODAL CONTENT & ROWS
-     ========================= */
   .detail-row {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    gap: 10px;
+    justify-content: space-between; /* Pushes label left, value right */
+    align-items: center; /* Vertically aligns pill with label */
+    margin-bottom: 15px;
+    width: 100%; /* Ensure it takes full card width */
   }
 
-  .detail-remarks {
-    margin-top: 16px;
-    max-height: 150px;
-    line-height: 1.4;
-    overflow-y: auto;
-    padding-right: 6px;
-    word-wrap: break-word;
-    white-space: normal;
-    background: #fdfdfd;
-    border: 1px solid #f0f0f0;
-    padding: 8px;
-    border-radius: 4px;
+  /* This ensures the values align to the right */
+  .detail-row span:last-child {
+    text-align: right;
+    word-break: break-word;
   }
 
-  .label {
+  /* Ensure the label doesn't shrink */
+  .detail-row .label {
+    flex-shrink: 0;
     font-weight: 600;
+    color: #718096;
+    font-size: 0.9rem;
   }
 
-  /* =========================
-      STATUS PILLS (MODAL)
-     ========================= */
+  /* ... rest of your CSS ... */
+
   .status-pill {
-    padding: 4px 12px;
-    border-radius: 999px;
+    padding: 4px 14px;
+    border-radius: 20px;
     font-weight: 700;
-    text-transform: capitalize;
+    font-size: 0.85rem;
+    text-transform: uppercase;
   }
-
   .status-pill.pending {
     background: #fff3cd;
     color: #856404;
   }
-
   .status-pill.viewed {
-    background: #cfe2ff;
-    color: #084298;
+    background: #d1ecf1;
+    color: #0c5460;
   }
-
   .status-pill.resolved {
     background: #d4edda;
     color: #155724;
   }
 
+  /* Reusing the rest of your welfare styling... */
+  .view-btn {
+    padding: 8px 16px;
+    background-color: #7dc9e1;
+    border: 1px solid #5fb3cc;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    justify-self: center;
+  }
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal-card {
+    background: #fff;
+    width: 95%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 16px;
+    position: relative;
+  }
+  .remarks-box {
+    background: #f7fafc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #7dc9e1;
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .admin-controls {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #edf2f7;
+  }
+  #updateStatusSelect {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 2px solid #edf2f7;
+  }
+  .save-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 28px;
+  }
   .close-action {
-    margin-top: 20px;
+    margin-top: 12px;
     width: 100%;
     padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
     cursor: pointer;
-    font-weight: 600;
-  }
-
-  .close-action:hover {
-    background: #e2e6ea;
   }
 }
