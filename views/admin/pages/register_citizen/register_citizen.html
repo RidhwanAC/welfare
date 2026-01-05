@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="./pages/register_citizen/register_citizen.css"
+    />
+  </head>
+  <body>
+    <h2>My Info</h2>
+    <form id="register-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="full-name"
+          placeholder="Enter your full name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">IC Number</label>
+        <input
+          type="text"
+          id="ic-number"
+          placeholder="Enter your IC number"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Email Address</label>
+        <input
+          type="text"
+          id="email-address"
+          placeholder="Enter your email address"
+          required
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Phone Number</label>
+        <input
+          type="text"
+          id="phone-number"
+          placeholder="Enter your phone number"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Household Size</label>
+        <input type="text" id="household-size" placeholder="e.g. 5" required />
+      </div>
+      <div class="form-group">
+        <label for="name">Household Income (RM)</label>
+        <input
+          type="text"
+          id="monthly-income"
+          placeholder="e.g. 5000"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="district">District</label>
+        <select id="district" required>
+          <option value="" disabled selected>-- Select district</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sub-district">Sub-District</label>
+        <select id="sub-district" required disabled>
+          <option value="" disabled selected>-- Select sub-district</option>
+        </select>
+      </div>
+      <button type="button" class="submit" id="openModal">Save</button>
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+          <span class="close-btn" id="closeModal">&times;</span>
+          <h2>Success</h2>
+          <p>Your information has been saved.</p>
+          <button id="actionBtn">OK!</button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

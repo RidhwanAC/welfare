@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="./pages/dashboard_summary/dashboard_summary.css"
+    />
+  </head>
+  <body>
+    <h2>Welfare Application Form</h2>
+    <form id="welfare-form">
+      <div class="form-group">
+        <label for="name">Type of Aid Needed</label>
+        <select id="aid-type" required>
+          <!-- The disabled option acts like a placeholder -->
+          <option value="" disabled selected>-- Select Aid Type</option>
+          <option value="food-assistance">Food Assistance</option>
+          <option value="cash-assistance">Cash Assistance</option>
+          <option value="medical-assistance">medical Assistance</option>
+          <option value="educational-support">Educational Support</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Welfare Category</label>
+        <select id="welfare-category" required>
+          <!-- The disabled option acts like a placeholder -->
+          <option value="" disabled selected>-- Select Category</option>
+          <option value="b40">B40</option>
+          <option value="single-mother">Single Mother</option>
+          <option value="elderly">Elderly</option>
+          <option value="disabled">Disabled</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Remarks</label>
+        <textarea
+          id="remarks"
+          placeholder="-- Your Reply --"
+          rows="5"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" id="submitBtn">Submit Applicatin</button>
+
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+          <span class="close-btn" id="closeModal">&times;</span>
+          <h2 id="modalTitle">Success!</h2>
+          <p id="modalMessage">
+            Your application has been submitted successfully.
+          </p>
+          <button id="actionBtn">Got it!</button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
