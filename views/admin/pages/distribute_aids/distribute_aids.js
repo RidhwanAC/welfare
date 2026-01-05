@@ -51,7 +51,6 @@ export async function init(userData) {
       if (data.status === "success") {
         alert("Aid successfully distributed!");
         closeModal();
-        // No need to reload list as users don't change, just history
       } else {
         alert("Error: " + data.message);
       }
@@ -85,9 +84,6 @@ function renderList(container) {
     .map(
       (c) => `
     <div class="list-item">
-        <span style="font-family: monospace; font-weight: bold;">${
-          c.user_id
-        }</span>
         <span class="truncate"><b>${c.full_name}</b></span>
         <span>${toTitleCase(c.district)}</span>
         <span>${toTitleCase(c.sub_district)}</span>
@@ -118,7 +114,6 @@ async function loadAidHistory(userId) {
     const result = await res.json();
 
     if (result.status === "success" && result.data.length > 0) {
-      // Calculate Total
       const total = result.data.reduce(
         (sum, item) => sum + parseFloat(item.amount),
         0
@@ -136,9 +131,12 @@ async function loadAidHistory(userId) {
         .map(
           (item) => `
         <div class="history-item">
-            <span class="date">${new Date(item.created_at).toLocaleDateString(
-              "en-GB"
-            )}</span>
+            <div class="history-meta">
+              <span>${new Date(item.created_at).toLocaleDateString(
+                "en-GB"
+              )}</span>
+              <span style="margin-left: 10px;">ID: ${item.aid_id}</span>
+            </div>
             <span class="amt">RM ${parseFloat(item.amount).toFixed(2)}</span>
             <p style="margin: 4px 0 0 0; color: #4a5568;">${item.aid_remark}</p>
         </div>
@@ -149,7 +147,7 @@ async function loadAidHistory(userId) {
       historyList.innerHTML = totalBadge + listHtml;
     } else {
       historyList.innerHTML =
-        "<p style='text-align:center; padding:20px; color: #a0aec0;'>No previous records found for this citizen.</p>";
+        "<p style='text-align:center; padding:20px; color: #a0aec0;'>No previous records found.</p>";
     }
   } catch (e) {
     historyList.innerHTML = "<p>Failed to load history.</p>";

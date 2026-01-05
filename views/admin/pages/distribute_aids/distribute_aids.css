@@ -5,162 +5,192 @@
     min-height: 100%;
   }
 
+  h2 {
+    margin-bottom: 8px;
+    color: #2d3436;
+    font-weight: 600;
+  }
   .subtitle {
     color: #636e72;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
   }
 
-  /* List Styling */
+  /* Table Style (Inherited from View Applications) */
   .list-container {
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     overflow: hidden;
   }
 
   .list-header,
   .list-item {
     display: grid;
-    grid-template-columns: 100px 1.5fr 1fr 1fr 120px;
+    grid-template-columns: 1.5fr 1fr 1fr 120px;
     align-items: center;
-    padding: 16px;
+    padding: 16px 24px;
     gap: 12px;
   }
 
   .list-header {
-    background: #f1f3f5;
+    background-color: #f1f3f5;
     font-weight: 700;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
     border-bottom: 2px solid #dee2e6;
   }
 
   .list-item {
     border-bottom: 1px solid #edf2f7;
+    transition: background 0.2s;
   }
 
+  .list-item:hover {
+    background-color: #fcfdfe;
+  }
+
+  /* Primary Action Button */
   .view-btn {
     padding: 8px 16px;
-    background-color: #2ecc71;
+    background-color: #7dc9e1;
     border: none;
     border-radius: 6px;
     color: #fff;
     font-weight: 600;
+    font-size: 0.85rem;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
 
-  /* Modal Structure */
+  .view-btn:hover {
+    background-color: #66bfbf;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(125, 201, 225, 0.3);
+  }
+
+  /* Modal Styling */
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(45, 52, 54, 0.6);
+    backdrop-filter: blur(3px);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 9999;
   }
-
   .modal-overlay.active {
     display: flex;
   }
 
-  .modal-card.history-enabled {
+  .modal-card {
     background: #fff;
     width: 90%;
     max-width: 850px;
-    padding: 30px;
-    border-radius: 15px;
+    padding: 32px;
+    border-radius: 20px;
     position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   }
 
-  /* Split Layout */
+  .modal-card h3 {
+    margin-top: 0;
+    color: #1a202c;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+  }
+
+  .recipient-info {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
+    margin: 16px 0;
+    border-left: 5px solid #7dc9e1;
+  }
+
   .modal-split {
     display: flex;
-    gap: 30px;
+    gap: 32px;
     margin-top: 20px;
   }
-
   .history-section {
-    flex: 1.2;
+    flex: 1.3;
   }
   .form-section {
     flex: 1;
   }
 
-  .recipient-info {
-    background: #f1f3f5;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-
   .section-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     color: #718096;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    display: block;
     border-bottom: 1px solid #edf2f7;
-    padding-bottom: 5px;
+    padding-bottom: 6px;
   }
 
-  /* History List Items */
+  /* History Items */
   .history-list {
-    max-height: 300px;
+    max-height: 320px;
     overflow-y: auto;
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 12px;
+    padding-right: 8px;
   }
-
   .history-item {
     background: #fff;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 12px;
     border: 1px solid #e2e8f0;
   }
-
-  .history-item .date {
+  .history-meta {
     color: #a0aec0;
     font-size: 0.75rem;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
   }
-  .history-item .amt {
-    font-weight: bold;
+  .amt {
+    font-weight: 800;
     color: #2ecc71;
-    display: block;
-    margin-top: 2px;
+    font-size: 1rem;
   }
 
   /* Form Elements */
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
   }
   .label {
     display: block;
     font-weight: 600;
-    margin-bottom: 5px;
-    color: #444;
+    margin-bottom: 6px;
+    color: #4a5568;
+    font-size: 0.9rem;
   }
 
   input,
-  textarea {
+  textarea,
+  select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid #edf2f7;
+    border-radius: 10px;
     font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #7dc9e1;
   }
 
-  /* Custom Rule: Remove Number Arrows */
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  /* Custom Rule: Fixed Textarea */
   textarea {
     resize: none;
-    height: 90px; /* Approximately 3 lines */
-    overflow-y: auto;
+    height: 100px;
   }
 
   .save-btn {
@@ -169,26 +199,32 @@
     background: #2ecc71;
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
   }
 
   .close-action {
     width: 100%;
     padding: 10px;
     background: none;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
     margin-top: 10px;
     cursor: pointer;
+    color: #718096;
   }
 
   .close-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 20px;
+    right: 24px;
     font-size: 28px;
+    color: #a0aec0;
     cursor: pointer;
+  }
+  .close-btn:hover {
+    color: #2d3436;
   }
 }

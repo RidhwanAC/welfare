@@ -10,7 +10,7 @@ if (!$user_id) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT amount, aid_remark, created_at FROM tbl_aid WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt = $conn->prepare("SELECT aid_id, amount, aid_remark, created_at FROM tbl_aid WHERE user_id = ? ORDER BY created_at DESC");
     $stmt->execute([$user_id]);
     $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

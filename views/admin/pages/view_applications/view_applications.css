@@ -1,5 +1,4 @@
 @scope (#main-content) {
-  /* Page root container */
   :scope {
     padding: 24px;
     background-color: #f8f9fa;
@@ -12,29 +11,19 @@
     font-weight: 600;
   }
 
-  /* =========================
-     LIST & TABLE LAYOUT
-     ========================= */
   .list-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    font-family: inherit;
   }
 
   .list-header,
   .list-item {
     display: grid;
-    /* ID, Name, Type, Date, Status, Action */
-    grid-template-columns: 100px 1.5fr 1.2fr 1fr 1fr 120px;
+    grid-template-columns: 80px 1.5fr 1.2fr 1fr 1fr 120px;
     align-items: center;
-    padding: 16px;
+    padding: 16px 24px;
     gap: 12px;
   }
 
@@ -43,8 +32,8 @@
     font-weight: 700;
     color: #495057;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.5px;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
     border-bottom: 2px solid #dee2e6;
   }
 
@@ -52,140 +41,65 @@
     border-bottom: 1px solid #edf2f7;
     transition: background 0.2s;
   }
-
   .list-item:hover {
-    background-color: #fdfdfd;
+    background-color: #fcfdfe;
   }
 
-  .list-item span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #2d3436;
-  }
-
-  .truncate {
-    font-weight: 500;
-  }
-
-  /* =========================
-     BUTTONS & ACTIONS
-     ========================= */
   .view-btn {
     padding: 8px 16px;
     background-color: #7dc9e1;
-    border: 1px solid #5fb3cc;
+    border: none;
     border-radius: 6px;
     color: #fff;
     font-weight: 600;
-    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    justify-self: center;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   }
 
-  .view-btn:hover {
-    background-color: #66bfbf;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .view-btn:active {
-    transform: translateY(0);
-  }
-
-  /* =========================
-     STATUS COLORS (TABLE)
-     ========================= */
-  .status {
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
+  /* Status Colors */
   .status.approved {
-    color: #28a745;
+    color: #2ecc71;
+    font-weight: 700;
   }
   .status.pending {
     color: #fd7e14;
+    font-weight: 700;
   }
   .status.rejected {
-    color: #dc3545;
+    color: #e74c3c;
+    font-weight: 700;
   }
 
-  /* =========================
-     MODAL OVERLAY
-     ========================= */
+  /* Modal Inheritance from Aid Style */
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
+    background: rgba(45, 52, 54, 0.6);
+    backdrop-filter: blur(3px);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 9999;
   }
-
   .modal-overlay.active {
     display: flex;
   }
 
-  /* =========================
-     MODAL CARD
-     ========================= */
   .modal-card {
-    background: #ffffff;
+    background: #fff;
     width: 95%;
-    max-width: 450px;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    padding: 32px;
+    border-radius: 20px;
     position: relative;
-    animation: modalPop 0.3s ease-out;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   }
 
-  @keyframes modalPop {
-    from {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  .modal-card h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #1a202c;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-
-  .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    cursor: pointer;
-    font-size: 28px;
-    color: #a0aec0;
-    transition: color 0.2s;
-  }
-
-  .close-btn:hover {
-    color: #e53e3e;
-  }
-
-  /* =========================
-     MODAL DETAILS
-     ========================= */
   .detail-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
   }
-
   .label {
     font-weight: 600;
     color: #718096;
@@ -193,102 +107,38 @@
   }
 
   .remarks-box {
-    background: #f7fafc;
-    padding: 12px;
-    border-radius: 8px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
     border-left: 4px solid #7dc9e1;
     font-style: italic;
-    font-size: 0.95rem;
     color: #4a5568;
     margin-top: 8px;
-    max-height: 120px;
-    overflow-y: auto;
   }
 
-  /* Status Pills in Modal */
-  .status-pill {
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-  }
-
-  .status-pill.pending {
-    background: #fff3cd;
-    color: #856404;
-  }
-  .status-pill.approved {
-    background: #d4edda;
-    color: #155724;
-  }
-  .status-pill.rejected {
-    background: #f8d7da;
-    color: #721c24;
-  }
-
-  /* =========================
-     ADMIN CONTROLS (NEW STYLING)
-     ========================= */
   .admin-controls {
-    margin-top: 25px;
-    padding-top: 20px;
+    margin-top: 24px;
+    padding-top: 24px;
     border-top: 2px dashed #edf2f7;
   }
 
-  #updateStatusSelect {
+  select {
     width: 100%;
     padding: 12px;
-    margin: 10px 0 15px 0;
-    border-radius: 8px;
+    margin: 8px 0 20px 0;
+    border-radius: 10px;
     border: 2px solid #edf2f7;
-    background-color: #fff;
-    font-size: 1rem;
-    font-family: inherit;
-    color: #2d3436;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  #updateStatusSelect:focus {
-    border-color: #7dc9e1;
+    background: #fff;
   }
 
   .save-btn {
     width: 100%;
     padding: 14px;
-    background-color: #2ecc71;
+    background: #2ecc71;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 700;
-    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
-  }
-
-  .save-btn:hover {
-    background-color: #27ae60;
-    box-shadow: 0 6px 12px rgba(46, 204, 113, 0.3);
-  }
-
-  .close-action {
-    margin-top: 12px;
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    background: #fff;
-    color: #718096;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-
-  .close-action:hover {
-    background: #f7fafc;
-    color: #2d3436;
   }
 }
