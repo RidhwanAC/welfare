@@ -1,0 +1,238 @@
+@scope (#main-content) {
+  :scope {
+    padding: 24px;
+    background-color: #f8f9fa;
+    min-height: 100%;
+  }
+
+  h2 {
+    margin-bottom: 24px;
+    color: #2d3436;
+    font-weight: 600;
+  }
+
+  /* Standardized Table Container */
+  .list-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .list-header,
+  .list-item {
+    display: grid;
+    /* ID, Complainant, Date, Status, Action */
+    grid-template-columns: 100px 1.5fr 1fr 1fr 120px;
+    align-items: center;
+    padding: 16px 24px;
+    gap: 12px;
+  }
+
+  .list-header {
+    background-color: #f1f3f5;
+    font-weight: 700;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  .list-item {
+    border-bottom: 1px solid #edf2f7;
+    transition: background 0.2s;
+  }
+
+  .list-item:hover {
+    background-color: #fcfdfe;
+  }
+
+  /* Complaint Status Text (Table View) */
+  .status {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .status.pending {
+    color: #fd7e14;
+  }
+  .status.viewed {
+    color: #7dc9e1;
+  } /* Uses Primary Color */
+  .status.resolved {
+    color: #2ecc71;
+  }
+
+  /* Standardized Manage Button */
+  .view-btn {
+    padding: 8px 16px;
+    background-color: #7dc9e1;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    justify-self: center;
+  }
+
+  .view-btn:hover {
+    background-color: #66bfbf;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(125, 201, 225, 0.3);
+  }
+
+  /* Standardized Modal Overlay */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(45, 52, 54, 0.6);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+  }
+
+  /* Standardized Modal Card */
+  .modal-card {
+    background: #fff;
+    width: 95%;
+    max-width: 480px;
+    padding: 32px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .modal-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #1a202c;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+  }
+
+  /* Detail Alignment Styling */
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .label {
+    font-weight: 600;
+    color: #718096;
+    font-size: 0.9rem;
+  }
+
+  /* Standardized Status Pills */
+  .status-pill {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+  .status-pill.pending {
+    background: #fff3cd;
+    color: #856404;
+  }
+  .status-pill.viewed {
+    background: #e0f4f9;
+    color: #0c5460;
+  }
+  .status-pill.resolved {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  /* Standardized Remarks Box */
+  .remarks-box {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
+    border-left: 4px solid #7dc9e1;
+    font-style: italic;
+    color: #4a5568;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Admin Control Section */
+  .admin-controls {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 2px dashed #edf2f7;
+  }
+
+  #updateStatusSelect {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 16px 0;
+    border-radius: 10px;
+    border: 2px solid #edf2f7;
+    background-color: #fff;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+
+  #updateStatusSelect:focus {
+    outline: none;
+    border-color: #7dc9e1;
+  }
+
+  /* Commit Action Button */
+  .save-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
+    transition: background 0.2s;
+  }
+
+  .save-btn:hover {
+    background-color: #27ae60;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    cursor: pointer;
+    font-size: 28px;
+    color: #a0aec0;
+  }
+
+  .close-action {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #718096;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .close-action:hover {
+    background: #f8fafc;
+    color: #2d3436;
+  }
+}

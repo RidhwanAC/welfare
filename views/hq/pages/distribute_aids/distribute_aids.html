@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/distribute_aids/distribute_aids.css" />
+  </head>
+  <body>
+    <div class="aid-distribution-root">
+      <h2>Distribute Financial Aid</h2>
+      <p class="subtitle">Select a citizen to record an aid distribution.</p>
+
+      <div class="list-container">
+        <div class="list-header">
+          <span>Citizen Name</span>
+          <span>District</span>
+          <span>Sub-District</span>
+          <span>Action</span>
+        </div>
+        <div id="citizenList"></div>
+      </div>
+
+      <div class="modal-overlay" id="aidModal">
+        <div class="modal-card history-enabled">
+          <span class="close-btn" id="closeAidModal">&times;</span>
+          <h3>Aid Management</h3>
+
+          <div class="recipient-info">
+            <p>Recipient: <strong id="recipientName"></strong></p>
+            <p>User ID: <span id="recipientId"></span></p>
+          </div>
+
+          <div class="modal-split">
+            <div class="history-section">
+              <h4 class="section-title">Previous Distributions</h4>
+              <div id="aidHistoryList" class="history-list"></div>
+            </div>
+
+            <div class="form-section">
+              <h4 class="section-title">New Distribution</h4>
+              <form id="aidForm">
+                <div class="form-group">
+                  <label class="label">Amount (RM)</label>
+                  <input
+                    type="number"
+                    id="aidAmount"
+                    step="0.01"
+                    placeholder="0.00"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="label">Remarks</label>
+                  <textarea
+                    id="aidRemark"
+                    placeholder="Reason for aid..."
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="save-btn" id="submitAidBtn">
+                  Confirm Distribution
+                </button>
+                <button type="button" class="close-action" id="cancelAidBtn">
+                  Cancel
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

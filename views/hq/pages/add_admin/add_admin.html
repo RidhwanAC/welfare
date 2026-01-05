@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/add_admin/add_admin.css" />
+  </head>
+  <body>
+    <h2>Add New Administrative Officer</h2>
+
+    <form id="add-admin-form">
+      <div class="form-section">
+        <p class="section-title">Personal Information</p>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input
+            type="text"
+            id="full_name"
+            placeholder="Enter Official Name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>IC Number</label>
+          <input
+            type="text"
+            id="ic_number"
+            placeholder="Example: 900101015566"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input
+            type="text"
+            id="phone"
+            placeholder="Example: 0123456789"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-section">
+        <p class="section-title">Area & Role</p>
+        <div class="form-group">
+          <label>Officer Level (Privilege)</label>
+          <select id="privilege" required>
+            <option value="" disabled selected>-- Select Role --</option>
+            <option value="1">Ketua Kampung</option>
+            <option value="2">Penghulu</option>
+            <option value="3">Pejabat Daerah</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>District</label>
+          <select id="district" required>
+            <option value="" disabled selected>-- Select district --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Sub-District (Mukim)</label>
+          <select id="sub_district" required disabled>
+            <option value="" disabled selected>
+              -- Select sub-district --
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <p class="section-title">Account Credentials</p>
+        <div class="form-group">
+          <label>Username</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Unique Username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Temporary Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Initial Password"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn">Register Admin</button>
+    </form>
+
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-content">
+        <h2 id="modalTitle">Account Created</h2>
+        <p id="modalMessage">The administrative account has been registered.</p>
+        <button id="actionBtn">OK</button>
+      </div>
+    </div>
+  </body>
+</html>

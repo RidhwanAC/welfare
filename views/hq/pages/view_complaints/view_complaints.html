@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/view_complaints/view_complaints.css" />
+  </head>
+  <body>
+    <div class="application-status-root">
+      <h2>Citizen Complaints</h2>
+
+      <div class="list-container">
+        <div class="list-header">
+          <span>ID</span>
+          <span>Complainant</span>
+          <span>Date</span>
+          <span>Status</span>
+          <span>Action</span>
+        </div>
+        <div id="complaintList"></div>
+      </div>
+
+      <div class="modal-overlay" id="detailModal">
+        <div class="modal-card">
+          <span class="close-btn" id="closeDetailModal">&times;</span>
+          <h3>Complaint Review</h3>
+
+          <div class="detail-row">
+            <span class="label">Complainant Name</span>
+            <span id="detailName" style="font-weight: bold"></span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Current Status</span>
+            <span id="detailStatus" class="status-pill"></span>
+          </div>
+          <div class="detail-remarks">
+            <span class="label">Complaint Details</span>
+            <p id="detailRemarks" class="remarks-box"></p>
+          </div>
+
+          <div id="adminActionSection" class="admin-controls">
+            <hr />
+            <label class="label">Update Status</label>
+            <select id="updateStatusSelect">
+              <option value="pending">Pending</option>
+              <option value="viewed">Viewed</option>
+              <option value="resolved">Resolved</option>
+            </select>
+            <button class="save-btn" id="saveStatusBtn">
+              Update Complaint
+            </button>
+          </div>
+
+          <button class="close-action" id="closeDetailBtn">Close</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
