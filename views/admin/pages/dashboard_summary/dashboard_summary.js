@@ -1,56 +1,21 @@
-export function init(userData) {
-  const form = document.getElementById("welfare-form");
-  const modal = document.getElementById("modalOverlay");
-  const closeBtn = document.getElementById("closeModal");
-  const actionBtn = document.getElementById("actionBtn");
+export async function init(userData) {
+  const { privilege, district, sub_district } = userData;
 
-  if (!userData || !form || !modal) return;
+  try {
+    // Build the URL with query parameters for filtering
+    const url = `http://localhost/welfare/welfare/server/fetch_summary.php?privilege=${privilege}&district=${district}&sub_district=${sub_district}`;
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+    const response = await fetch(url);
+    const data = await response.json();
 
-    // 1. Validate Form
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    // 2. Prepare Payload (Include user_id from session)
-    const payload = {
-      user_id: userData.user_id,
-      aid_type: document.getElementById("aid-type").value,
-      welfare_category: document.getElementById("welfare-category").value,
-      remarks: document.getElementById("remarks").value,
-      status: "Pending",
-    };
-
-    // 3. HTTP POST
-    try {
-      const response = await fetch(
-        "http://localhost/welfare/welfare/server/submit_welfare.php",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const result = await response.json();
-
-      if (result.status === "success") {
-        // 4. Success -> Open Modal
-        modal.classList.add("active");
-        form.reset();
-      } else {
-        alert("Submission failed: " + result.message);
-      }
-    } catch (err) {
-      alert("Server error. Please try again later.");
-    }
-  });
-
-  // 5. Close Modal Logic
-  const closeModal = () => modal.classList.remove("active");
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
-  if (actionBtn) actionBtn.addEventListener("click", closeModal);
+    // Update the DOM
+    document.getElementById("count-citizens").textContent = data.total_citizens;
+    document.getElementById("count-welfare").textContent = data.total_welfare;
+    document.getElementById("count-pending-welfare").textContent =
+      data.pending_welfare;
+    document.getElementById("count-pending-complaints").textContent =
+      data.pending_complaints;
+  } catch (error) {
+    console.error("Error loading dashboard data:", error);
+  }
 }
