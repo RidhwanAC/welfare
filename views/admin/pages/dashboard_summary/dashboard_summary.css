@@ -1,7 +1,7 @@
 @scope (#main-content) {
   :scope {
     padding: 24px;
-    background-color: #f8f9fa; /* Soft background to make cards pop */
+    background-color: #f8f9fa;
     min-height: 100%;
   }
 
@@ -28,46 +28,48 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   }
 
-  /* Simple hover interaction */
   .stat-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   }
 
   .stat-card h3 {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     color: #718096;
     margin: 0 0 8px 0;
   }
 
   .stat-card p {
-    font-size: 2.25rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #1a202c;
     margin: 0;
   }
 
-  /* Color accents using a modern left-border and light background tint */
+  /* Unified System Color Accents */
+  .stat-card.primary {
+    border-left: 5px solid #7dc9e1;
+    background: linear-gradient(to right, #f0f9fb, #ffffff 30%);
+  }
+  .stat-card.primary p {
+    color: #5fb3cc;
+  }
+
   .stat-card.blue {
     border-left: 5px solid #007bff;
   }
-
+  .stat-card.green {
+    border-left: 5px solid #2ecc71;
+  }
   .stat-card.yellow {
     border-left: 5px solid #ffc107;
-    background: linear-gradient(to right, #fff9e6, #ffffff 20%);
   }
-
   .stat-card.red {
     border-left: 5px solid #dc3545;
-    background: linear-gradient(to right, #fdf2f2, #ffffff 20%);
-  }
-
-  .stat-card.green {
-    border-left: 5px solid #28a745;
   }
 }
