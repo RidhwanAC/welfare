@@ -29,7 +29,7 @@ logoutBtn.addEventListener("click", () => {
 const pages = {
   "Dashboard Summary": "dashboard_summary",
   "Register Citizen": "register_citizen",
-  "View Applicants": "view_applicants",
+  "View Applications": "view_applications",
   "View Complaints": "view_complaints",
 };
 

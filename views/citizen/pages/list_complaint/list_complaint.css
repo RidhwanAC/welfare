@@ -52,7 +52,7 @@
       STATUS TEXT (LIST VIEW)
      ========================= */
   .status.resolved,
-  .status.seen,
+  .status.viewed,
   .status.pending {
     font-weight: 800;
   }
@@ -61,7 +61,7 @@
     color: green;
   }
 
-  .status.seen {
+  .status.viewed {
     color: #007bff; /* Professional Blue */
   }
 
@@ -178,7 +178,7 @@
     color: #856404;
   }
 
-  .status-pill.seen {
+  .status-pill.viewed {
     background: #cfe2ff;
     color: #084298;
   }
