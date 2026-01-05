@@ -28,9 +28,9 @@ logoutBtn.addEventListener("click", () => {
 // 5. Navigation Logic
 const pages = {
   "Dashboard Summary": "dashboard_summary",
-  "Register Citizen": "register_citizen",
   "View Applications": "view_applications",
   "View Complaints": "view_complaints",
+  "Distribute Aids": "distribute_aids",
 };
 
 navItems.forEach((item) => {

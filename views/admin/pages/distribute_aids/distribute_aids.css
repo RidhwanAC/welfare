@@ -1,0 +1,194 @@
+@scope (#main-content) {
+  :scope {
+    padding: 24px;
+    background-color: #f8f9fa;
+    min-height: 100%;
+  }
+
+  .subtitle {
+    color: #636e72;
+    margin-bottom: 20px;
+  }
+
+  /* List Styling */
+  .list-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+
+  .list-header,
+  .list-item {
+    display: grid;
+    grid-template-columns: 100px 1.5fr 1fr 1fr 120px;
+    align-items: center;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .list-header {
+    background: #f1f3f5;
+    font-weight: 700;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  .list-item {
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .view-btn {
+    padding: 8px 16px;
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Modal Structure */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+  }
+
+  .modal-card.history-enabled {
+    background: #fff;
+    width: 90%;
+    max-width: 850px;
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+  }
+
+  /* Split Layout */
+  .modal-split {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  .history-section {
+    flex: 1.2;
+  }
+  .form-section {
+    flex: 1;
+  }
+
+  .recipient-info {
+    background: #f1f3f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #718096;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 5px;
+  }
+
+  /* History List Items */
+  .history-list {
+    max-height: 300px;
+    overflow-y: auto;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .history-item {
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .history-item .date {
+    color: #a0aec0;
+    font-size: 0.75rem;
+  }
+  .history-item .amt {
+    font-weight: bold;
+    color: #2ecc71;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* Form Elements */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #444;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+  }
+
+  /* Custom Rule: Remove Number Arrows */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Custom Rule: Fixed Textarea */
+  textarea {
+    resize: none;
+    height: 90px; /* Approximately 3 lines */
+    overflow-y: auto;
+  }
+
+  .save-btn {
+    width: 100%;
+    padding: 14px;
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .close-action {
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+  }
+}
