@@ -51,6 +51,7 @@ export async function init(userData) {
     const adminData = {
       full_name: document.getElementById("full_name").value,
       ic_number: document.getElementById("ic_number").value,
+      email: document.getElementById("email").value, // Added email
       phone: document.getElementById("phone").value,
       privilege: document.getElementById("privilege").value,
       district: districtSelect.value,
