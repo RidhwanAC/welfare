@@ -1,32 +1,47 @@
 <?php
-// Set headers to return JSON response
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 
-// Include the database connection
 include_once 'dbconnect.php';
 
-// Check if the request is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // 1. Get input data (works for both standard form-data and JSON)
-    $username = $_POST['username'] ?? null;
-    $email    = $_POST['email'] ?? null;
-    $password = $_POST['password'] ?? null;
+    // 1. INPUT SANITIZATION
+    // Use htmlspecialchars and strip_tags to kill any script injection (XSS)
+    $username = isset($_POST['username']) ? htmlspecialchars(strip_tags(trim($_POST['username'])), ENT_QUOTES, 'UTF-8') : null;
+    $email    = isset($_POST['email']) ? filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL) : null;
+    $password = $_POST['password'] ?? null; // Passwords should NOT be sanitized (it alters the hash)
 
-    // 2. Basic Validation
+    // 2. INPUT VALIDATION
     if (!$username || !$email || !$password) {
-        echo json_encode(["status" => "error", "message" => "Required fields are missing."]);
+        echo json_encode(["status" => "error", "message" => "All fields are required."]);
+        exit;
+    }
+
+    // Email Format Validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(["status" => "error", "message" => "Invalid email format."]);
+        exit;
+    }
+
+    // Username Length/Character Validation (Prevent excessively long strings)
+    if (strlen($username) < 3 || strlen($username) > 20 || !preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+        echo json_encode(["status" => "error", "message" => "Username must be 3-20 characters (alphanumeric only)."]);
+        exit;
+    }
+
+    // Password Complexity (Demonstrating security logic)
+    if (strlen($password) < 8) {
+        echo json_encode(["status" => "error", "message" => "Password must be at least 8 characters long."]);
         exit;
     }
 
     try {
-        // 3. Hash the password
+        // 3. SECURE HASHING
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        // 4. Prepare SQL to insert user
-        // Note: full_name is handled by the SQL Trigger we created earlier
+        // 4. PREPARED STATEMENTS (SQL Injection Mitigation)
         $sql = "INSERT INTO tbl_user (username, email, password) VALUES (:username, :email, :password)";
         $stmt = $conn->prepare($sql);
         
@@ -35,10 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':password', $hashedPassword);
 
         if ($stmt->execute()) {
-            // 5. Get the ID of the newly created user
             $userId = $conn->lastInsertId();
 
-            // 6. Fetch user data (excluding password) to return in response
+            // 5. FETCH DATA FOR RETURN
             $query = "SELECT user_id, username, email, full_name, ic_number, phone, 
                              household_size, household_income, district, 
                              sub_district, privilege, created_at 
@@ -47,9 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $getUser = $conn->prepare($query);
             $getUser->bindParam(':user_id', $userId);
             $getUser->execute();
-            $userData = $getUser->fetch();
+            $userData = $getUser->fetch(PDO::FETCH_ASSOC);
 
-            // 7. Send Success Response
             echo json_encode([
                 "status" => "success",
                 "message" => "Registration successful",
@@ -57,11 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
         }
     } catch (PDOException $e) {
-        // Handle Duplicate Entry errors (Username or Email)
         if ($e->getCode() == 23000) {
             echo json_encode(["status" => "error", "message" => "Username or Email already exists."]);
         } else {
-            echo json_encode(["status" => "error", "message" => "Database error: " . $e->getMessage()]);
+            // Log the actual error for dev, but show generic message to user
+            error_log($e->getMessage());
+            echo json_encode(["status" => "error", "message" => "A registration error occurred."]);
         }
     }
 } else {
