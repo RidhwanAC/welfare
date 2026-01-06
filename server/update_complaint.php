@@ -19,7 +19,7 @@ if (isset($data['complaint_id'], $data['status'])) {
     $new_status   = trim($data['status']);
     
     // Strict White-listing of allowed statuses
-    $allowed_statuses = ['Pending', 'In Progress', 'Resolved', 'Rejected'];
+    $allowed_statuses = ['Pending', 'Viewed', 'Resolved', 'Rejected'];
     if (!in_array($new_status, $allowed_statuses)) {
         echo json_encode(["status" => "error", "message" => "Invalid status value."]);
         exit;
