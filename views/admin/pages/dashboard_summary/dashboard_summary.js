@@ -3,6 +3,7 @@ export async function init(userData) {
 
   try {
     const url = `/welfare/welfare/server/fetch_summary.php?privilege=${privilege}&district=${district}&sub_district=${sub_district}`;
+
     const response = await fetch(url);
     const data = await response.json();
 
